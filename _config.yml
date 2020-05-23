@@ -8,6 +8,7 @@ email: "startpage@nexak.com"
 description: "Start Page"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.jacobwilson.io" # the base hostname & protocol for your site, e.g. http://example.com
+timezone: "America/New_York"
 
 # Conversion
 markdown: kramdown
@@ -15,6 +16,11 @@ highlighter: rouge
 lsi: false
 excerpt_separator: "\n\n"
 incremental: false
+
+# Data
+collections:
+  - custom_links
+collections_dir: data
 
 # Build settings
 plugins:
