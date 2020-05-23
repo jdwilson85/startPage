@@ -2,7 +2,15 @@
 <html lang="{{ site.lang | default: 'en-US' }}">
     {% include head.html %}
 <body>
-  {{ content }}
+  <ul>
+    {% for links in site.data.links %}
+      <li>
+        <a href="{{ links.uri }}">
+          {{ links.title }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
 {% include footer.html %}
 </body>
 </html>
