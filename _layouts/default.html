@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: 'en-US' }}">
 {% include head.html %}
+
 <body>
   <div class="container-fluid">
-    <ul>
-      {% for link in site.data.links %}
-      <li>
-        <a href="{{ link.uri }}">
-          {{ link.title }}
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
+    <div class="row">
+      Row 1
+    </div>
+    <div class="row">
+      <ul>
+        {% for link in site.data.links %}
+        <li>
+          <a href="{{ link.uri }}">
+            {{ link.title }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
   {% include footer.html %}
 </body>
+
 </html>
