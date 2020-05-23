@@ -1,2 +1,4 @@
-#Index
-Test Page
+---
+layout: page
+title: Home
+---
