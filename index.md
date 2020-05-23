@@ -1,4 +1,6 @@
 ---
-layout: page
+layout: default
 title: Home
 ---
+
+Parsed from index.md
