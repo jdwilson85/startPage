@@ -17,11 +17,6 @@ lsi: false
 excerpt_separator: "\n\n"
 incremental: false
 
-# Data
-collections:
-  - custom_links
-collections_dir: data
-
 # Build settings
 plugins:
   - jekyll-feed
