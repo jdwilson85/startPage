@@ -10,11 +10,13 @@
     <div class="row">
       <ul>
         {% for link in site.data.links %}
+        <div class="col">
         <li>
           <a href="{{ link.uri }}">
             {{ link.title }}
           </a>
         </li>
+      </div>
         {% endfor %}
       </ul>
     </div>
