@@ -24,10 +24,9 @@
       </div>
     </div>
     <div class="row Links">
-      <div class="col-md-4"></div>
       <div class="col-md-4">
         <ul>
-          {% for link in site.data.links %}
+          {% for link in site.data.linksOther %}
           <li>
             <a href="{{ link.uri }}">
               {{ link.title }}
@@ -36,7 +35,28 @@
           {% endfor %}
         </ul>
       </div>
-      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <ul>
+          {% for link in site.data.linksTech %}
+          <li>
+            <a href="{{ link.uri }}">
+              {{ link.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <ul>
+          {% for link in site.data.linksSocial %}
+          <li>
+            <a href="{{ link.uri }}">
+              {{ link.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </div>
   {% include footer.html %}
