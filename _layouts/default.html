@@ -4,7 +4,7 @@
 
 <body>
   <div class="container">
-    <div class="row mt-5 Title">
+    <div class="row my-5 Title">
       <div class="mx-auto">
         JacobWilson.IO
       </div>
@@ -52,15 +52,16 @@
       </div>
       <div class="col-md-4">
         <h5>social</h5>
-        <ul>
+        <div class="list-group">
+          <button type="button" class="list-group-item list-group-item-action active">
+            social
+          </button>
           {% for link in site.data.linksSocial %}
-          <li>
-            <a href="{{ link.uri }}">
-              {{ link.title }}
-            </a>
-          </li>
-          {% endfor %}
-        </ul>
+          <button type="button" class="list-group-item list-group-item-action"> <a href="{{ link.uri }}">
+            {{ link.title }}
+          </a>
+         </button>         
+        </div>
       </div>
     </div>
   </div>
