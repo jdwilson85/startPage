@@ -14,7 +14,7 @@
         <input type="text" class="form-control" aria-label="googleSearch" aria-describedby="gSearch">
         <div class="input-group-append">
           <button class="btn btn-dark" type="button" id="button-addon2">
-            <svg class="bi bi-arrow-right-short" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <svg class="bi bi-arrow-right-short" width="20" height="20" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M8.146 4.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.793 8 8.146 5.354a.5.5 0 0 1 0-.708z"/>
               <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5H11a.5.5 0 0 1 0 1H4.5A.5.5 0 0 1 4 8z"/>
             </svg>
@@ -24,11 +24,11 @@
     </div>
     <div class="row my-5 Links">
       <div class="col-md-3">
-        <p class="text-secondary">other</p>
+        <h5>other</h5>
         <ul class="list-group list-group-flush">
           {% for link in site.data.linksOther %}
           <li class="list-group-item">
-            <a href="{{ link.uri }}">
+            <a href="{{ link.uri }}" class="text-decoration-none">
               {{ link.title }}
             </a>
           </li>
@@ -36,11 +36,11 @@
         </ul>
       </div>
       <div class="col-md-3">
-        <p class="text-secondary">tech</p>
+        <h5>social</h5>
         <ul class="list-group list-group-flush">
           {% for link in site.data.linksTech %}
           <li class="list-group-item">
-            <a href="{{ link.uri }}">
+            <a href="{{ link.uri }}" class="text-decoration-none">
               {{ link.title }}
             </a>
           </li>
@@ -48,11 +48,11 @@
         </ul>
       </div>
       <div class="col-md-3">
-        <p class="text-secondary">social</p>
+        <h5>social</h5>
         <ul class="list-group list-group-flush">
           {% for link in site.data.linksSocial %}
           <li class="list-group-item">
-            <a href="{{ link.uri }}">
+            <a href="{{ link.uri }}" class="text-decoration-none">
               {{ link.title }}
             </a>
           </li>
@@ -60,11 +60,11 @@
         </ul>
       </div>
       <div class="col-md-3">
-        <p class="text-secondary">vdi</p>
+        <h5>vdi</h5>
         <ul class="list-group list-group-flush">
           {% for link in site.data.linksVDI %}
           <li class="list-group-item">
-            <a href="{{ link.uri }}">
+            <a href="{{ link.uri }}" class="text-decoration-none">
               {{ link.title }}
             </a>
           </li>
