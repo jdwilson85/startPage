@@ -4,10 +4,10 @@
 
 <body>
   <div class="container">
-    <div class="row">
+    <div class="row Title">
       JacobWilson.IO
     </div>
-    <div class="row">
+    <div class="row Search">
       <div class="input-group input-group-lg">
         <input type="text" class="form-control" aria-label="googleSearch" aria-describedby="gSearch">
         <div class="input-group-append">
@@ -23,16 +23,20 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <ul>
-        {% for link in site.data.links %}
-        <li>
-          <a href="{{ link.uri }}">
-            {{ link.title }}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
+    <div class="row Links">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <ul>
+          {% for link in site.data.links %}
+          <li>
+            <a href="{{ link.uri }}">
+              {{ link.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="col-md-4"></div>
     </div>
   </div>
   {% include footer.html %}
