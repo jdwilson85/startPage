@@ -28,9 +28,9 @@
     <div class="row my-5 Links">
       <div class="col-md-4">
         <p class="text-secondary">other</p>
-        <ul>
+        <ul class="list-group list-group-flush">
           {% for link in site.data.linksOther %}
-          <li>
+          <li class="list-group-item">
             <a href="{{ link.uri }}">
               {{ link.title }}
             </a>
@@ -40,9 +40,9 @@
       </div>
       <div class="col-md-4">
         <p class="text-secondary">tech</p>
-        <ul>
+        <ul class="list-group list-group-flush">
           {% for link in site.data.linksTech %}
-          <li>
+          <li class="list-group-item">
             <a href="{{ link.uri }}">
               {{ link.title }}
             </a>
