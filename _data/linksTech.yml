@@ -7,7 +7,10 @@
 - title: O365
   uri: https://portal.office.com
 
-- title: Azure
+- title: AWS Console
+  uri: https://console.aws.amazon.com
+  
+- title: Azure Console
   uri: https://portal.azure.com
 
 - title: Confluence
