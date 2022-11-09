@@ -24,3 +24,26 @@ $list-group-bg: #1E1E1E;
 $list-group-border-color: #ccc3;
 $list-group-item-padding-y: 0.5rem;
 $list-group-item-padding-x: 0rem;
+
+header {
+    animation: fade 1s ease-in;
+    display: none;
+    flex: 0 1 auto;
+    flex-direction: row;
+    justify-content: center;
+    padding: var(--spacing-m) var(--spacing-m) 0 var(--spacing-m);
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#date-time,
+#weather { flex: 1 1 auto; }
+
+#weather { text-align: right; }
+
+#weather img {
+    display: inline-flex;
+    margin-right: var(--spacing-xs);
+    width: 1.5rem;
+}
