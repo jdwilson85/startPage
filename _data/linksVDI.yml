@@ -1,4 +1,7 @@
-- title: Duke Energy
+- title: Duke Energy - W365
+  uri: https://windows365.microsoft.com
+
+- title: Duke Energy - MyApps
   uri: https://www2.myapps-duke-energy.com
 
 - title: TIAA
