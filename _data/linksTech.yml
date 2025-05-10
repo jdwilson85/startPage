@@ -4,26 +4,20 @@
 - title: Claude.AI
   uri: https://claude.ai/
 
-- title: NetScaler
-  uri: https://www.netscaler.com
+- title: LearnXinY
+  uri: https://learnxinyminutes.com
 
 - title: GitHub
   uri: https://www.github.com
 
 - title: O365
   uri: https://portal.office.com
-
-- title: AWS Console
-  uri: https://console.aws.amazon.com
-  
+ 
 - title: Azure Console
   uri: https://portal.azure.com
 
 - title: Confluence
   uri: https://advantecio.atlassian.net
-
-- title: ShareFile
-  uri: https://agsi.sharefile.com
 
 - title: NetScaler Wiki
   uri: https://adc-info.rtfd.io
