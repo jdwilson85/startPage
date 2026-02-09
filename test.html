@@ -1,0 +1,390 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JacobWilson.IO</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- FontAwesome for Icons (No SVG) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Chosen Palette: VS Code Dark Theme Inspiration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vscode: {
+                            bg: '#1e1e1e',
+                            sidebar: '#252526',
+                            active: '#37373d',
+                            accent: '#007acc',
+                            text: '#cccccc',
+                            light: '#ffffff'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #cccccc;
+        }
+        
+        /* Chart Container Styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        /* Glassmorphism for v2 cards */
+        .glass-panel {
+            background: rgba(37, 37, 38, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item.active {
+            border-bottom: 2px solid #007acc;
+            color: #ffffff;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #37373d;
+            border-radius: 10px;
+        }
+    </style>
+
+    <!-- Application Structure Plan: 
+         1. Header: Navigation between Analysis Dashboard and Prototype.
+         2. Analysis View: Visualizes repo bloat and strategic roadmap items.
+         3. Prototype View: Features a dynamic clock, a smart search with 'bang' logic, 
+            and a 4-column link grid populated with the user's actual project data.
+    -->
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-vscode-accent selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="w-full bg-vscode-sidebar border-b border-gray-700 px-6 py-4 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-rocket text-vscode-accent text-xl"></i>
+                <h1 class="text-xl font-bold text-white tracking-tight">JacobWilson<span class="font-light text-gray-400">.IO</span></h1>
+            </div>
+            <div class="flex space-x-8">
+                <button onclick="switchView('startpage')" id="nav-startpage" class="nav-item active px-2 py-1 text-sm font-semibold hover:text-white transition-colors">
+                    startPage
+                </button>
+                <button onclick="switchView('lab')" id="nav-lab" class="nav-item px-2 py-1 text-sm font-semibold hover:text-white transition-colors">
+                    Lab
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow w-full max-w-7xl mx-auto p-6">
+        
+        <!-- VIEW 1: LAB DASHBOARD -->
+        <section id="view-lab" class="hidden fade-in space-y-8">
+            <div class="bg-vscode-sidebar rounded-lg p-6 border-l-4 border-vscode-accent shadow-md">
+                <h2 class="text-2xl font-bold text-white mb-2">Project Analysis: Current State vs. Future Vision</h2>
+                <p class="text-gray-400 leading-relaxed">
+                    The current project is a well-structured Jekyll landing page. However, our analysis shows that 82% of the repository's file count is comprised of vendored Bootstrap source files. The redesign focuses on offloading these to a CDN and introducing dynamic browser-side features like the multi-engine search bar and live clock.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-vscode-sidebar rounded-lg p-6 shadow-md">
+                    <h3 class="text-lg font-semibold text-white mb-4">Technical Optimization Impact</h3>
+                    <div class="chart-container">
+                        <canvas id="optimizationChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-vscode-sidebar rounded-lg p-6 shadow-md flex flex-col">
+                    <h3 class="text-lg font-semibold text-white mb-4">Strategic Roadmap</h3>
+                    <div id="roadmap-container" class="space-y-3 flex-grow overflow-y-auto pr-2 custom-scrollbar"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-green-900/10 border border-green-800/50 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-green-400 mb-2"><i class="fa-solid fa-thumbs-up mr-2"></i>Current Strengths</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-gray-300">
+                        <li>Modular YAML data management for high-frequency links.</li>
+                        <li>Clean VS Code inspired dark color palette.</li>
+                        <li>Responsive grid layout works well on mobile devices.</li>
+                    </ul>
+                </div>
+                <div class="bg-red-900/10 border border-red-800/50 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-red-400 mb-2"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Critical Improvements</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-gray-300">
+                        <li>High technical debt from vendored Bootstrap assets.</li>
+                        <li>Lack of interactive utility (Search engine toggles).</li>
+                        <li>Static interface doesn't adapt to time-of-day.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- VIEW 2: STARTPAGE -->
+        <section id="view-startpage" class="fade-in h-full flex flex-col">
+            <div class="flex-grow flex flex-col items-center justify-start pt-10 pb-20">
+                
+                <div class="text-center mb-12 animate-fade-in-down">
+                    <h1 id="clock" class="text-6xl md:text-8xl font-light text-white tracking-tighter mb-2 font-mono">00:00</h1>
+                    <h2 id="greeting" class="text-xl md:text-2xl text-vscode-accent font-medium">Loading...</h2>
+                </div>
+
+                <div class="w-full max-w-2xl px-4 mb-16 relative group">
+                    <div class="absolute inset-y-0 left-0 pl-7 flex items-center pointer-events-none">
+                        <i id="search-icon" class="fa-brands fa-google text-gray-400 text-lg transition-colors group-focus-within:text-vscode-accent"></i>
+                    </div>
+                    <input type="text" id="smart-search" 
+                        class="block w-full pl-16 pr-4 py-4 bg-vscode-sidebar border-2 border-gray-700 rounded-full text-lg placeholder-gray-500 focus:outline-none focus:border-vscode-accent focus:shadow-[0_0_15px_rgba(0,122,204,0.3)] transition-all text-white" 
+                        placeholder="Search Google... (Try !w for Wikipedia)">
+                    
+                    <div class="absolute top-full left-0 w-full mt-4 flex justify-center space-x-6 opacity-50 group-focus-within:opacity-100 transition-opacity duration-300">
+                        <button onclick="setEngine('google')" class="engine-btn text-vscode-accent flex items-center space-x-1" data-engine="google">
+                            <span class="bg-gray-700 px-2 py-0.5 rounded text-xs font-mono">!g</span>
+                            <span class="text-xs">Google</span>
+                        </button>
+                        <button onclick="setEngine('duckduckgo')" class="engine-btn text-gray-400 flex items-center space-x-1" data-engine="duckduckgo">
+                            <span class="bg-gray-700 px-2 py-0.5 rounded text-xs font-mono">!d</span>
+                            <span class="text-xs">DuckDuckGo</span>
+                        </button>
+                        <button onclick="setEngine('wiki')" class="engine-btn text-gray-400 flex items-center space-x-1" data-engine="wiki">
+                            <span class="bg-gray-700 px-2 py-0.5 rounded text-xs font-mono">!w</span>
+                            <span class="text-xs">Wiki</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="link-grid" class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+                    <!-- Dynamic Content Rendered by JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // --- SOURCE DATA: POPULATED FROM YOUR YAML FILES ---
+        const linksData = {{ site.data | jsonify }};
+
+        const optimizationData = {
+            labels: ['Total Files', 'Bootstrap Source'],
+            current: [85, 70],
+            proposed: [15, 0]
+        };
+
+        const roadmapItems = [
+            { id: 1, text: "Migrate to Bootstrap 5 CDN", status: "pending", impact: "High" },
+            { id: 2, text: "Convert SCSS Overrides to Native CSS Vars", status: "pending", impact: "Medium" },
+            { id: 3, text: "Implement JS Search Prefixes (!g, !w)", status: "done", impact: "High" },
+            { id: 4, text: "Dynamic Time/Greeting Engine", status: "done", impact: "Low" }
+        ];
+
+        const searchEngines = {
+            google: { url: "https://google.com/search?q=", icon: "fa-brands fa-google", bang: "!g" },
+            duckduckgo: { url: "https://duckduckgo.com/?q=", icon: "fa-solid fa-search", bang: "!d" },
+            wiki: { url: "https://en.wikipedia.org/wiki/Special:Search?search=", icon: "fa-brands fa-wikipedia-w", bang: "!w" }
+        };
+
+        let currentEngineKey = 'google';
+
+        // --- APP LOGIC ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initLab();
+            initStartPage();
+        });
+
+        function switchView(view) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`nav-${view}`).classList.add('active');
+            
+            if (view === 'lab') {
+                document.getElementById('view-lab').classList.remove('hidden');
+                document.getElementById('view-startpage').classList.add('hidden');
+            } else {
+                document.getElementById('view-lab').classList.add('hidden');
+                document.getElementById('view-startpage').classList.remove('hidden');
+            }
+        }
+
+        function initLab() {
+            renderChart();
+            renderRoadmap();
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('optimizationChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: optimizationData.labels,
+                    datasets: [
+                        { label: 'Current Repo', data: optimizationData.current, backgroundColor: 'rgba(239, 68, 68, 0.4)' },
+                        { label: 'Post-Redesign', data: optimizationData.proposed, backgroundColor: 'rgba(34, 197, 94, 0.4)' }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: '#888' } } },
+                    scales: {
+                        y: { grid: { color: '#333' }, ticks: { color: '#888' } },
+                        x: { grid: { display: false }, ticks: { color: '#888' } }
+                    }
+                }
+            });
+        }
+
+        function renderRoadmap() {
+            const container = document.getElementById('roadmap-container');
+            container.innerHTML = roadmapItems.map(item => `
+                <div class="flex items-center justify-between p-3 bg-gray-800/50 rounded border border-gray-700">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-${item.status === 'done' ? 'solid fa-circle-check text-green-500' : 'regular fa-circle text-gray-500'}"></i>
+                        <span class="${item.status === 'done' ? 'line-through text-gray-500' : 'text-gray-200'} text-sm">${item.text}</span>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-gray-700 text-gray-400">${item.impact}</span>
+                </div>
+            `).join('');
+        }
+
+        function initStartPage() {
+            startClock();
+            renderLinks();
+            initSearch();
+        }
+
+        function startClock() {
+            const clock = document.getElementById('clock');
+            const greet = document.getElementById('greeting');
+            function tick() {
+                const now = new Date();
+                clock.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+                
+                const hr = now.getHours();
+                if (hr < 12) greet.textContent = "Good Morning, Jacob.";
+                else if (hr < 18) greet.textContent = "Good Afternoon, Jacob.";
+                else greet.textContent = "Good Evening, Jacob.";
+            }
+            setInterval(tick, 1000);
+            tick();
+        }
+
+        function renderLinks() {
+            const grid = document.getElementById('link-grid');
+            grid.innerHTML = '';
+
+            const styles = {
+                social: { icon: 'fa-share-nodes', color: 'text-blue-400' },
+                tech: { icon: 'fa-code', color: 'text-yellow-400' },
+                vdi: { icon: 'fa-server', color: 'text-green-400' },
+                other: { icon: 'fa-house-laptop', color: 'text-purple-400' }
+            };
+
+            Object.keys(linksData).forEach(key => {
+                const items = linksData[key];
+                // Ensure we are rendering a list of links, not other data files (like roadmap)
+                if (!Array.isArray(items) || (items.length > 0 && items[0].status)) return;
+
+                const style = styles[key.toLowerCase()] || { icon: 'fa-folder', color: 'text-gray-400' };
+                
+                grid.innerHTML += `
+                    <div class="glass-panel rounded-xl p-5 hover:border-vscode-accent transition-colors duration-300">
+                        <div class="flex items-center mb-4 border-b border-gray-700 pb-2">
+                            <i class="fa-solid ${style.icon} ${style.color} mr-2"></i>
+                            <h3 class="font-bold text-white uppercase text-xs tracking-widest">${key}</h3>
+                        </div>
+                        <ul class="space-y-3">
+                            ${items.map(link => `
+                                <li>
+                                    <a href="${link.url}" class="group flex items-center text-sm text-gray-400 hover:text-white transition-all py-1">
+                                        <span class="w-8 text-center mr-2 text-lg group-hover:text-vscode-accent transition-colors"><i class="${link.icon}"></i></span>
+                                        <span class="font-medium tracking-wide">${link.title}</span>
+                                    </a>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            });
+        }
+
+        function setEngine(key) {
+            currentEngineKey = key;
+            const engine = searchEngines[key];
+            document.getElementById('search-icon').className = `${engine.icon} text-lg transition-colors text-vscode-accent`;
+            document.getElementById('smart-search').placeholder = `Search ${key.charAt(0).toUpperCase() + key.slice(1)}...`;
+            
+            document.querySelectorAll('.engine-btn').forEach(btn => {
+                btn.className = `engine-btn flex items-center space-x-1 ${btn.dataset.engine === key ? 'text-vscode-accent' : 'text-gray-400'}`;
+            });
+        }
+
+        function initSearch() {
+            const input = document.getElementById('smart-search');
+            input.addEventListener('input', (e) => {
+                const val = e.target.value.trim();
+                for (const [key, engine] of Object.entries(searchEngines)) {
+                    if (val.startsWith(engine.bang)) setEngine(key);
+                }
+            });
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const engine = searchEngines[currentEngineKey];
+                    let q = input.value;
+                    if (q.startsWith(engine.bang)) q = q.slice(engine.bang.length).trim();
+                    if (q) alert(`Redirecting to: ${engine.url}${encodeURIComponent(q)}`);
+                }
+            });
+        }
+    </script>
+    
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</body>
+</html>
