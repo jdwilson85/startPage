@@ -1,8 +1,13 @@
 - title: Reddit
   uri: https://www.reddit.com
+  icon: fa-brands fa-reddit
+
 
 - title: YouTube
   uri: https://www.youtube.com
+  icon: fa-brands fa-youtube
+
 
 - title: CNN
   uri: https://www.cnn.com
+  icon: fa-solid fa-newspaper

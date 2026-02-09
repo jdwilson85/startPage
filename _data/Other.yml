@@ -4,6 +4,7 @@
 
 - title: TigerNet
   uri: https://www.tigernet.com
-
+  
 - title: Proton
   uri: https://account.proton.me/login?product=generic&language=en
+  icon: fa-solid fa-atom

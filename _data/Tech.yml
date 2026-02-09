@@ -1,23 +1,31 @@
 - title: Gemini.AI
   uri: https://gemini.google.com/
+  icon: fa-brands fa-google
 
 - title: Claude.AI
   uri: https://claude.ai/
+  icon: fa-solid fa-star-of-life
 
 - title: LearnXinY
   uri: https://learnxinyminutes.com
+  icon: fa-solid fa-graduation-cap
 
 - title: GitHub
   uri: https://www.github.com
+  icon: fa-brands fa-github
 
 - title: Style Guide
   uri: https://google.github.io/styleguide/
+  icon: fa-brands fa-google
  
 - title: Azure Console
   uri: https://portal.azure.com
+  icon: fa-brands fa-microsoft
 
 - title: Confluence
   uri: https://advantecio.atlassian.net
+  icon: fa-brands fa-confluence
 
 - title: NetScaler Wiki
   uri: https://adc-info.rtfd.io
+  icon: fa-brands fa-wikipedia-w
