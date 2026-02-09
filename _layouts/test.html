@@ -343,7 +343,7 @@ layout: null
                         <ul class="space-y-3">
                             ${items.map(link => `
                                 <li>
-                                    <a href="${link.url}" class="group flex items-center text-sm text-gray-400 hover:text-white transition-all py-1">
+                                    <a href="${link.uri || link.url}" class="group flex items-center text-sm text-gray-400 hover:text-white transition-all py-1">
                                         <span class="w-8 text-center mr-2 text-lg group-hover:text-vscode-accent transition-colors"><i class="${link.icon}"></i></span>
                                         <span class="font-medium tracking-wide">${link.title}</span>
                                     </a>
@@ -385,7 +385,7 @@ layout: null
         }
     </script>
     
-    <footer class="fixed bottom-0 w-full bg-vscode-sidebar border-t border-gray-700 px-6 py-1 text-center text-gray-400 text-xs">
+    <footer class="fixed bottom-0 w-full bg-vscode-sidebar border-t border-gray-700 px-6 py-1 text-left text-gray-400 text-xs">
         <small>
             buildDate : {{ site.time | date_to_rfc822 }}
         </small>
