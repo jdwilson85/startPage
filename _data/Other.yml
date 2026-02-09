@@ -1,5 +1,6 @@
 - title: Amazon
   uri: https://www.amazon.com
+  icon: fa-brands fa-amazon
 
 - title: TigerNet
   uri: https://www.tigernet.com
