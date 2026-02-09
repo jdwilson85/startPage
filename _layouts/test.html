@@ -101,7 +101,7 @@ layout: null
             and a 4-column link grid populated with the user's actual project data.
     -->
 </head>
-<body class="min-h-screen flex flex-col font-sans selection:bg-vscode-accent selection:text-white">
+<body class="min-h-screen flex flex-col font-sans selection:bg-vscode-accent selection:text-white pb-6">
 
     <!-- Navigation -->
     <nav class="w-full bg-vscode-sidebar border-b border-gray-700 px-6 py-4 sticky top-0 z-50 shadow-lg">
@@ -385,6 +385,12 @@ layout: null
         }
     </script>
     
+    <footer class="fixed bottom-0 w-full bg-vscode-sidebar border-t border-gray-700 px-6 py-1 text-center text-gray-400 text-xs">
+        <small>
+            buildDate : {{ site.time | date_to_rfc822 }}
+        </small>
+    </footer>
+
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </body>
 </html>
