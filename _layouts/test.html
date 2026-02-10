@@ -2,84 +2,8 @@
 layout: null
 ---
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JacobWilson.IO</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-       
-    <!-- FontAwesome for Icons (No SVG) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- Chosen Palette: VS Code Dark Theme Inspiration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        vscode: {
-                            bg: '#1e1e1e',
-                            sidebar: '#252526',
-                            active: '#37373d',
-                            accent: '#007acc',
-                            text: '#cccccc',
-                            light: '#ffffff'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        body {
-            background-color: #1e1e1e;
-            color: #cccccc;
-        }
-
-        /* Glassmorphism for v2 cards */
-        .glass-panel {
-            background: rgba(37, 37, 38, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-item.active {
-            border-bottom: 2px solid #007acc;
-            color: #ffffff;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #37373d;
-            border-radius: 10px;
-        }
-    </style>
-</head>
+<html lang="{{ site.lang | default: 'en-US' }}">
+{% include head.html %}
 
 <body class="min-h-screen flex flex-col font-sans selection:bg-vscode-accent selection:text-white pb-6">
 
@@ -317,11 +241,7 @@ layout: null
         }
     </script>
     
-    <footer class="fixed bottom-0 w-full bg-vscode-sidebar border-t border-gray-700 px-6 py-1 text-left text-gray-400 text-xs">
-        <small>
-            buildDate : {{ site.time | date_to_rfc822 }}
-        </small>
-    </footer>
+{% include footer.html %}
 
 </body>
 </html>
