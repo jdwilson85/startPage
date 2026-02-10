@@ -74,3 +74,11 @@ src/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.claude
+
+### Jekyll ###
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+vendor/

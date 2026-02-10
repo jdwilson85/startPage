@@ -1,0 +1,33 @@
+<script>
+    const searchEngines = {{ site.data.search_engines | jsonify }};
+    let currentEngineKey = searchEngines[0].key;
+
+    function setEngine(key) {
+        currentEngineKey = key;
+        const engine = searchEngines.find(e => e.key === key);
+        document.getElementById('search-icon').className = `${engine.icon} text-lg transition-colors text-vscode-accent`;
+        document.getElementById('smart-search').placeholder = `Search ${engine.label}...`;
+
+        document.querySelectorAll('.engine-btn').forEach(btn => {
+            btn.className = `engine-btn flex items-center space-x-1 ${btn.dataset.engine === key ? 'text-vscode-accent' : 'text-gray-400'}`;
+        });
+    }
+
+    function initSearch() {
+        const input = document.getElementById('smart-search');
+        input.addEventListener('input', (e) => {
+            const val = e.target.value.trim();
+            for (const engine of searchEngines) {
+                if (val.startsWith(engine.bang)) setEngine(engine.key);
+            }
+        });
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const engine = searchEngines.find(eng => eng.key === currentEngineKey);
+                let q = input.value;
+                if (q.startsWith(engine.bang)) q = q.slice(engine.bang.length).trim();
+                if (q) window.location.href = `${engine.url}${encodeURIComponent(q)}`;
+            }
+        });
+    }
+</script>

@@ -1,0 +1,19 @@
+<script>
+    function startClock() {
+        const clock = document.getElementById('clock');
+        const greet = document.getElementById('greeting');
+        const authorName = {{ site.author.name | jsonify }};
+
+        function tick() {
+            const now = new Date();
+            clock.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+
+            const hr = now.getHours();
+            if (hr < 12) greet.textContent = `Good Morning, ${authorName}.`;
+            else if (hr < 18) greet.textContent = `Good Afternoon, ${authorName}.`;
+            else greet.textContent = `Good Evening, ${authorName}.`;
+        }
+        setInterval(tick, 1000);
+        tick();
+    }
+</script>

@@ -1,0 +1,15 @@
+Social:
+  icon: fa-share-nodes
+  color: text-blue-400
+
+Tech:
+  icon: fa-code
+  color: text-yellow-400
+
+VDI:
+  icon: fa-server
+  color: text-green-400
+
+Other:
+  icon: fa-house-laptop
+  color: text-purple-400

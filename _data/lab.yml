@@ -1,0 +1,7 @@
+- title: UDM Router
+  uri: "https://router.dcr.internal/"
+  icon: fa-solid fa-network-wired
+
+- title: NextDNS
+  uri: "https://my.nextdns.io/"
+  icon: fa-solid fa-shield-halved

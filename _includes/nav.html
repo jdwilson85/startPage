@@ -1,0 +1,16 @@
+<nav class="w-full bg-vscode-sidebar border-b border-gray-700 px-6 py-4 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <i class="fa-solid fa-terminal text-vscode-accent text-xl"></i>
+            <h1 class="text-xl font-bold text-white tracking-tight">{{ site.title | split: "." | first }}<span class="font-light text-gray-400">.{{ site.title | split: "." | last }}</span></h1>
+        </div>
+        <div class="flex space-x-8">
+            <button onclick="switchView('startpage')" id="nav-startpage" class="nav-item active px-2 py-1 text-sm font-semibold hover:text-white transition-colors">
+                startPage
+            </button>
+            <button onclick="switchView('lab')" id="nav-lab" class="nav-item px-2 py-1 text-sm font-semibold hover:text-white transition-colors">
+                Lab
+            </button>
+        </div>
+    </div>
+</nav>

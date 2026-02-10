@@ -1,0 +1,17 @@
+- key: google
+  url: "https://google.com/search?q="
+  icon: fa-brands fa-google
+  bang: "!g"
+  label: Google
+
+- key: duckduckgo
+  url: "https://duckduckgo.com/?q="
+  icon: fa-solid fa-search
+  bang: "!d"
+  label: DuckDuckGo
+
+- key: wiki
+  url: "https://en.wikipedia.org/wiki/Special:Search?search="
+  icon: fa-brands fa-wikipedia-w
+  bang: "!w"
+  label: Wiki

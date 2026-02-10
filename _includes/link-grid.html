@@ -1,0 +1,28 @@
+<div id="link-grid" class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+    {% for category in site.data.links %}
+        {% assign key = category[0] %}
+        {% assign items = category[1] %}
+        {% assign meta = site.data.link_categories[key] %}
+        {% assign cat_icon = meta.icon | default: "fa-folder" %}
+        {% assign cat_color = meta.color | default: "text-gray-400" %}
+
+        <div class="glass-panel rounded-xl p-5 hover:border-vscode-accent transition-colors duration-300">
+            <div class="flex items-center mb-4 border-b border-gray-700 pb-2">
+                <i class="fa-solid {{ cat_icon }} {{ cat_color }} mr-2"></i>
+                <h3 class="font-bold text-white uppercase text-xs tracking-widest">{{ key }}</h3>
+            </div>
+            <ul class="space-y-3">
+                {% for link in items %}
+                <li>
+                    <a href="{{ link.uri }}" class="group flex items-center text-sm text-gray-400 hover:text-white transition-all py-1">
+                        <span class="w-8 text-center mr-2 text-lg group-hover:text-vscode-accent transition-colors">
+                            <i class="{{ link.icon }}"></i>
+                        </span>
+                        <span class="font-medium tracking-wide">{{ link.title }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>

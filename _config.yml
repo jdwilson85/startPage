@@ -1,38 +1,28 @@
 # Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
 title: "JacobWilson.IO"
 email: "startpage@nexak.com"
 description: "Start Page"
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://www.jacobwilson.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: ""
+url: "https://www.jacobwilson.io"
 timezone: "America/New_York"
 
-# Conversion
-markdown: kramdown
-highlighter: rouge
-lsi: false
-excerpt_separator: "\n\n"
-incremental: false
+# Author
+author:
+  name: "Jacob"
+
+# Weather
+weather:
+  latitude: 36.29417
+  longitude: -82.47250
+  unit: fahrenheit
 
 # Build settings
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
 
-# A list of the pages to display in the navigation bar
-header_pages:
-
-#compile bootstrap
-sass:
-  sass_dir: assets/css
-
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
+# Exclude from processing
 exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules
+  - README.md
