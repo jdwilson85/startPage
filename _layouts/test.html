@@ -123,6 +123,10 @@ layout: null
                 <div class="text-center mb-12 animate-fade-in-down">
                     <h1 id="clock" class="text-6xl md:text-8xl font-light text-white tracking-tighter mb-2 font-mono">00:00</h1>
                     <h2 id="greeting" class="text-xl md:text-2xl text-vscode-accent font-medium">Loading...</h2>
+                    <div id="weather" class="mt-4 text-gray-400 flex items-center justify-center space-x-2 hidden">
+                        <i id="weather-icon" class="text-xl"></i>
+                        <span id="weather-text" class="text-lg font-light"></span>
+                    </div>
                 </div>
 
                 <div class="w-full max-w-2xl px-4 mb-16 relative group">
@@ -157,7 +161,7 @@ layout: null
     </main>
 
     <script>
-        // --- SOURCE DATA: POPULATED FROM YOUR YAML FILES ---
+        // --- SOURCE DATA: POPULATED FROM YAML FILES ---
         const linksData = {{ site.data | jsonify }};
 
         const searchEngines = {
@@ -195,6 +199,7 @@ layout: null
             startClock();
             renderLinks();
             initSearch();
+            initWeather();
         }
 
         function startClock() {
@@ -276,7 +281,38 @@ layout: null
                     const engine = searchEngines[currentEngineKey];
                     let q = input.value;
                     if (q.startsWith(engine.bang)) q = q.slice(engine.bang.length).trim();
-                    if (q) alert(`Redirecting to: ${engine.url}${encodeURIComponent(q)}`);
+                    if (q) window.location.href = `${engine.url}${encodeURIComponent(q)}`;
+                }
+            });
+        }
+
+        function initWeather() {
+            if (!navigator.geolocation) return;
+            
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                try {
+                    const { latitude, longitude } = position.coords;
+                    // Using Open-Meteo API (Free, no key required)
+                    const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&temperature_unit=fahrenheit`);
+                    const data = await res.json();
+                    const { temperature, weathercode } = data.current_weather;
+                    
+                    const iconMap = {
+                        0: 'fa-sun', 1: 'fa-cloud-sun', 2: 'fa-cloud-sun', 3: 'fa-cloud',
+                        45: 'fa-smog', 48: 'fa-smog',
+                        51: 'fa-cloud-rain', 53: 'fa-cloud-rain', 55: 'fa-cloud-rain',
+                        61: 'fa-cloud-showers-heavy', 63: 'fa-cloud-showers-heavy', 65: 'fa-cloud-showers-heavy',
+                        71: 'fa-snowflake', 73: 'fa-snowflake', 75: 'fa-snowflake',
+                        80: 'fa-cloud-rain', 81: 'fa-cloud-rain', 82: 'fa-cloud-rain',
+                        95: 'fa-bolt', 96: 'fa-bolt', 99: 'fa-bolt'
+                    };
+                    
+                    const iconClass = iconMap[weathercode] || 'fa-cloud';
+                    document.getElementById('weather-icon').className = `fa-solid ${iconClass} text-vscode-accent`;
+                    document.getElementById('weather-text').textContent = `${temperature}°F`;
+                    document.getElementById('weather').classList.remove('hidden');
+                } catch (e) {
+                    console.error('Weather error:', e);
                 }
             });
         }
@@ -288,6 +324,5 @@ layout: null
         </small>
     </footer>
 
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </body>
 </html>
