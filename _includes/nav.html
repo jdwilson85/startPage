@@ -1,23 +1,28 @@
 <nav class="w-full bg-vscode-sidebar border-b border-gray-700 px-6 py-4 sticky top-0 z-50 shadow-lg">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-            <i class="fa-solid fa-terminal text-vscode-accent text-xl"></i>
-            <h1 class="text-xl font-bold text-white tracking-tight">{{ site.title | split: "." | first }}<span class="font-light text-gray-400">.{{ site.title | split: "." | last }}</span></h1>
+    <div class="flex items-center">
+        <div class="flex-1"></div>
+        <div class="max-w-7xl flex justify-between items-center flex-shrink-0" style="width: 80rem;">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-terminal text-vscode-accent text-xl"></i>
+                <h1 class="text-xl font-bold text-white tracking-tight">{{ site.title | split: "." | first }}<span class="font-light text-gray-400">.{{ site.title | split: "." | last }}</span></h1>
+            </div>
+            <div class="flex items-center space-x-8">
+                <button onclick="switchView('startpage')" id="nav-startpage" class="nav-item active px-2 py-1 text-sm font-semibold hover:text-white transition-colors">
+                    startPage
+                </button>
+                <button onclick="switchView('lab')" id="nav-lab" class="nav-item px-2 py-1 text-sm font-semibold hover:text-white transition-colors">
+                    Lab
+                </button>
+                <button onclick="switchView('pgp')" id="nav-pgp" class="nav-item px-2 py-1 text-sm font-semibold hover:text-white transition-colors">
+                    PGP
+                </button>
+            </div>
         </div>
-        <div class="flex items-center space-x-8">
-            <button onclick="switchView('startpage')" id="nav-startpage" class="nav-item active px-2 py-1 text-sm font-semibold hover:text-white transition-colors">
-                startPage
-            </button>
-            <button onclick="switchView('lab')" id="nav-lab" class="nav-item px-2 py-1 text-sm font-semibold hover:text-white transition-colors">
-                Lab
-            </button>
-            <button onclick="switchView('pgp')" id="nav-pgp" class="nav-item px-2 py-1 text-sm font-semibold hover:text-white transition-colors">
-                PGP
-            </button>
-        </div>
-        <div id="weather" class="flex items-center space-x-2 text-gray-400 hidden">
-            <i id="weather-icon" class="text-lg"></i>
-            <span id="weather-text" class="text-sm font-light"></span>
+        <div class="flex-1 flex justify-end">
+            <div id="weather" class="flex items-center space-x-2 text-gray-400 hidden">
+                <i id="weather-icon" class="text-lg"></i>
+                <span id="weather-text" class="text-sm font-light"></span>
+            </div>
         </div>
     </div>
 </nav>
