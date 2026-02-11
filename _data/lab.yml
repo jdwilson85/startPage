@@ -5,3 +5,7 @@
 - title: NextDNS
   uri: "https://my.nextdns.io/"
   icon: fa-solid fa-shield-halved
+
+- title: OpenPGP Key Server
+  uri: "https://keys.openpgp.org/"
+  icon: fa-solid fa-key

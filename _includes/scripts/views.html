@@ -7,13 +7,10 @@
         document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
         document.getElementById(`nav-${view}`).classList.add('active');
 
-        if (view === 'lab') {
-            document.getElementById('view-lab').classList.remove('hidden');
-            document.getElementById('view-startpage').classList.add('hidden');
-        } else {
-            document.getElementById('view-lab').classList.add('hidden');
-            document.getElementById('view-startpage').classList.remove('hidden');
-        }
+        const views = ['startpage', 'lab', 'pgp'];
+        views.forEach(v => {
+            document.getElementById(`view-${v}`).classList.toggle('hidden', v !== view);
+        });
     }
 
     function initStartPage() {
