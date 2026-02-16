@@ -1,0 +1,17 @@
+/* Inter - Variable weight (300-700) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(../webfonts/Inter-Variable.woff2) format('woff2');
+}
+
+/* JetBrains Mono - Variable weight (400-700) */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(../webfonts/JetBrainsMono-Variable.woff2) format('woff2');
+}
