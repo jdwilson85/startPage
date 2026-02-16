@@ -8,7 +8,7 @@
     --color-vscode-text: #cccccc;
     --color-vscode-light: #ffffff;
 
-    --font-sans: 'Inter', sans-serif;
+    --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 }
 
