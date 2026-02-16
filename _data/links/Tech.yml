@@ -22,9 +22,9 @@
   uri: https://portal.azure.com
   icon: fa-brands fa-microsoft
 
-- title: Confluence
-  uri: https://advantecio.atlassian.net
-  icon: fa-brands fa-confluence
+- title: URL Scan
+  uri: https://urlscan.io
+  icon: fa-solid fa-link
 
 - title: NetScaler Wiki
   uri: https://adc-info.rtfd.io
