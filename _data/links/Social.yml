@@ -7,6 +7,13 @@
   uri: https://www.youtube.com
   icon: fa-brands fa-youtube
 
+- title: Reuters
+  uri: https://www.reuters.com
+  icon: fa-solid fa-newspaper
+
+- title: BBC
+  uri: https://www.bbc.com
+  icon: fa-solid fa-newspaper
 
 - title: CNN
   uri: https://www.cnn.com
