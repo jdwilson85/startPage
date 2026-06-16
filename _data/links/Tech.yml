@@ -1,7 +1,3 @@
-- title: Gemini.AI
-  uri: https://gemini.google.com/
-  icon: fa-brands fa-google
-
 - title: Claude.AI
   uri: https://claude.ai/
   icon: fa-solid fa-star-of-life
